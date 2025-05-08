@@ -1,0 +1,594 @@
+﻿@using ManyRoomStudio.Domains.Staff;
+@model AdminStaffDomain;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var token = HttpContextAccessor.HttpContext.Session.GetString("token");
+}
+
+<div class="content-body">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header  pb-2">
+                        <h3 class="mb-0">Staff Management</h3>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#CreateNewStaff">
+                            Create
+                            Staff
+                        </button>
+                    </div>
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            @Html.Partial("~/Views/Staff/_stafflist.cshtml", Model.staffuserResponses)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="CreateNewStaff">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="_modalStafftitle_">Create Staff</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <div class="basic-form py-0">
+                                            <form>
+                                                <input type="hidden" value="0" id="_userid_" />
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                First
+                                                                Name
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter First Name" id="_firstname_" value="Staff firstname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Last
+                                                                Name
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Last Name" id="_lastname_" value="Staff LastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Email
+                                                            </label>
+                                                            <input type="email" class="form-control"
+                                                                   placeholder="Enter Email" id="_emailid_" required value="Staff@gmail.com">
+                                                            <span id="error_emailid_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Password
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Password" id="_password_" required value="Eglaf@123">
+                                                            <span id="error_password_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Address
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Address" id="_address_" value="kadi">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                City
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter City" id="_city_" value="KADI">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                State
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter State" id="_state_" value="Gujrat">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Postcode
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Postcode" id="_postcosde_" value="382715">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Country
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Country" id="_country_" value="Gujrat">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Mobile No
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter MobileNo" id="_mobileNo_" value="8160089473">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Select Franchisee</label>
+                                                            <select class="default-select form-control wide" id="_franchiseeuser_">
+                                                                <option value="">Select Franchisee</option>
+                                                                @if (Model.franchiseeUserResponses != null && Model.franchiseeUserResponses.Count > 0)
+                                                                {
+                                                                    foreach (var item in Model.franchiseeUserResponses)
+                                                                    {
+                                                                        <option value="@item.Value">@item.Text</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                            <span id="error_franchiseeuser_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" id="btnSubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="roomassigned">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="_modalFranchisee_">Room Assigned</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <input type="hidden" id="_assigneduserid_" />
+                                        <div class="basic-form py-0" id="roomassignedbody">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" id="btnRoomAssignedSubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#staffusertablelist').DataTable({
+            responsive: true,
+        });
+        $("#_emailid_, #_password_, #_publishablekey_, #_secretkey_").on('keypress', function () {
+            const inputId = $(this).attr('id');
+            $("#error" + inputId).text("");
+        });
+        $("#_franchiseeuser_").on('change', function () {
+            debugger;
+            const inputId = $(this).attr('id');
+            $("#error" + inputId).text("");
+        });
+
+
+        $('#CreateNewStaff').on('hidden.bs.modal', function () {
+                $('#CreateNewStaff input').val('');
+                $("#_userid_").val(0);
+                $("#_modalStafftitle_").text("Create Staff");
+                $("#_password_").prop("disabled", false);
+                $("#_password_").attr("type", "text");
+                $("#_franchiseeuser_").val("").prop("disabled", false).selectpicker('refresh');
+        });
+
+        $(document).on("click", "#btnSubmit", function (e) {
+            e.preventDefault();
+            $(".error-message").text("");
+            let hasError = false;
+            if(!$("#_emailid_").val()){
+                $("#error_emailid_").text("Email ID is required.");
+                hasError = true;
+            }
+            if(!$("#_password_").val()){
+                $("#error_password_").text("Password is required.");
+                hasError = true;
+            }
+            if(!$("#_franchiseeuser_").val() || $("#_franchiseeuser_").val() == 0){
+                 $("#error_franchiseeuser_").text("Franchisee is required.");
+                 hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+            debugger;
+            if($("#_userid_").val() > 0 ){
+                let staffuser =
+                {
+                    "ID":$("#_userid_").val(),
+                    "FirstName": $("#_firstname_").val(),
+                    "LastName":$("#_lastname_").val(),
+                    "Address":$("#_address_").val(),
+                    "City":$("#_city_").val(),
+                    "State":$("#_state_").val(),
+                    "Postcode":$("#_postcosde_").val(),
+                    "Country":$("#_country_").val(),
+                    "Website":$("#_website_").val(),
+                    "MobileNo":$("#_mobileNo_").val(),
+                    "Email": $("#_emailid_").val(),
+                    "FranchiseeAdminID":$("#_franchiseeuser_").val()
+                };
+
+                $.ajax({
+                    url: 'api/v1/user/updatestaffuser',
+                    type: 'PUT',
+                    data: JSON.stringify(staffuser),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + '@token'
+                    },
+                     success: function (data)
+                     {
+                        if (data != null && data?.id != null && data?.id >0) {
+                            $("#CreateNewStaff").modal('hide');
+                            Swal.fire
+                            ({
+                                title: 'Update!',
+                                text: 'Staff update successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+                                LoadStaffList();
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire
+                            (
+                                'Sorry!',
+                                "There was an error update the staff.'",
+                                'error'
+                            );
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+
+                     }
+                });
+            }
+            else{
+                debugger;
+                let staffuser =
+                {
+                    "ID":$("#_userid_").val(),
+                    "FirstName": $("#_firstname_").val(),
+                    "LastName":$("#_lastname_").val(),
+                    "Address":$("#_address_").val(),
+                    "City":$("#_city_").val(),
+                    "State":$("#_state_").val(),
+                    "Postcode":$("#_postcosde_").val(),
+                    "Country":$("#_country_").val(),
+                    "MobileNo":$("#_mobileNo_").val(),
+                    "Email": $("#_emailid_").val(),
+                    "Password":$("#_password_").val(),
+                    "FranchiseeAdminID":$("#_franchiseeuser_").val(),
+                };
+
+                $.ajax({
+                    url: 'api/v1/user/createstaffuser',
+                    type: 'POST',
+                    data: JSON.stringify(staffuser),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                     headers:
+                     {
+                        'Authorization': 'Bearer ' + '@token'
+                     },
+                     success: function (data)
+                     {
+                        if (data != null && data?.id != null && data?.id >0) {
+                            $("#CreateNewStaff").modal('hide');
+                            Swal.fire
+                            ({
+                                title: 'Saved!',
+                                text: 'Staff created successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+                                LoadStaffList();
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire
+                            (
+                                'Sorry!',
+                                "There was an error saving the franchisee.'",
+                                'error'
+                            );
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+
+                     }
+                });
+
+            }
+        });
+
+        $(document).on("click", "#btnRoomAssignedSubmit", function (e)
+        {
+            let selectedIds = [];
+            let userid = $("#_assigneduserid_").val();
+            $('.selecteroom:checked').each(function () {
+                selectedIds.push($(this).attr('attrroomid'));
+            });
+            if(userid && userid > 0)
+            {
+                let assignedbody =
+                {
+                    "UserId":userid,
+                    "RoomIds": selectedIds.length > 0 ? selectedIds : null
+                };
+                $.ajax({
+                    url: 'api/v1/roomstaffmapping/staff/assignedroom',
+                    type: 'POST',
+                    data: JSON.stringify(assignedbody),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + '@token'
+                    },
+                    success: function (data)
+                    {
+                        if (data != null && (data == true || data == "true"))
+                        {
+                            $("#roomassigned").modal('hide');
+                            Swal.fire({
+                                title: 'Saved!',
+                                text: 'Assigned successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire(
+                                'Sorry!',
+                                "There was an error assigne the rooms.'",
+                                'error');
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        debugger;
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+                     }
+                });
+            }
+        });
+    });
+
+    function LoadStaffList() {
+         $.ajax({
+            url: 'api/v1/user/onloadstaffList',
+            type: 'GET',
+            dataType: "json",
+            headers: {
+                'Authorization': 'Bearer ' + '@token'
+            },
+            success: function (data) {
+                $(".table-responsive").html("");
+                $(".table-responsive").html(data);
+                $('#staffusertablelist').DataTable({
+                     responsive: true,
+                });
+            }
+         });
+    }
+
+    function OnDelete(Id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+                if (result.value)
+                {
+                    $.ajax({
+                        url: 'api/v1/user/delete/' + Id,
+                        type: 'DELETE',
+                        dataType: "json",
+                        headers: {
+                         'Authorization': 'Bearer ' + '@token'
+                       },
+                        success: function (data) {
+                            if(data != null &&( data === true || data === "true")){
+                               Swal.fire({
+                                            title: 'Delete!',
+                                            text: 'staff delete successfully.',
+                                            icon: 'success',
+                                            showConfirmButton: true,
+                                            timer: 4000,
+                                        }).then(() => {
+                                            LoadFranchiseeList();
+                               });
+                            }
+                            else{
+                            }
+                        },
+                         error: function (xhr)
+                         {
+                            Swal.fire(
+                                'Sorry!',
+                                xhr?.responseJSON ? xhr?.responseJSON  : "stff Not delete",
+                                'error');
+                         }
+                });
+            }
+        });
+    }
+    function OnEdit(Id)
+    {
+        $.ajax({
+        url: 'api/v1/user/' + Id,
+        type: 'GET',
+        dataType: "json",
+        headers:
+        {
+            'Authorization': 'Bearer ' + '@token'
+        },
+        success: function (data)
+        {
+            if(data != null && data?.id > 0)
+            {
+                $("#_userid_").val(data?.id);
+                $("#_firstname_").val(data?.firstName);
+                $("#_lastname_").val(data?.lastName);
+                $("#_address_").val(data?.address);
+                $("#_city_").val(data?.city);
+                $("#_state_").val(data?.state);
+                $("#_postcosde_").val(data?.postcode);
+                $("#_country_").val(data?.country);
+                $("#_mobileNo_").val(data?.mobileNo);
+                $("#_emailid_").val(data?.email);
+                $("#_password_").val(data?.password);
+                if(data?.franchiseeAdminID > 0)
+                {
+                    $("#_franchiseeuser_").val(String(data?.franchiseeAdminID)).selectpicker('refresh');
+                    $("#_franchiseeuser_").prop("disabled", true).selectpicker('refresh');
+                }
+                else
+                {
+                    $("#_franchiseeuser_").val("").selectpicker('refresh');
+                }
+                $("#CreateNewStaff").modal('show');
+                $("#_password_").prop("disabled", true);
+                $("#_password_").attr("type", "password");
+                $("#_modalStafftitle_").text("Update Staff");
+             }
+            }
+        });
+    }
+
+    function OnRoomassigned(Id)
+    {
+        debugger;
+        $("#_assigneduserid_").val("");
+        $.ajax({
+            url: 'api/v1/roomstaffmapping/staff/room/mapping/'+Id,
+            type: 'GET',
+            dataType: "json",
+             headers: {
+                'Authorization': 'Bearer ' + '@token'
+             },
+            success: function (data) {
+                $("#_assigneduserid_").val(Id);
+                $("#roomassignedbody").html("");
+                $("#roomassignedbody").html(data);
+                $("#roomassigned").modal('show');
+            },
+            error: function (xhr)
+            {
+                 debugger;
+                Swal.fire
+                (
+                    'Sorry!',
+                     xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                     'error'
+                );
+            }
+         });
+    }
+</script>
+

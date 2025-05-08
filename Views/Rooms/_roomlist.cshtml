@@ -1,0 +1,45 @@
+﻿@using ManyRoomStudio.Boundary.Responses
+@model List<RoomManagementResponse>
+<table id="roomtablelist" class="display" style="min-width: 845px">
+    <thead>
+        <tr role="row">
+            <th>Room Number</th>
+            <th>Description</th>
+            <th>Pricing per hour</th>
+            <th>Discount</th>
+            <th>Maximum capacity </th>
+            <th>Event types</th>
+            <th data-sortable="false">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.RoomName</td>
+                    <td>@user.Description</td>
+                    <td>@user.HourlyPrice</td>
+                    <td>@user.DiscountAmount</td>
+                    <td>@user.Capacity</td>
+                    <td>@user.RoomEventsName</td>
+                    <td>
+                        <div class="d-flex">
+                            @* <a href="javascript:void(0);" class="btn btn-info shadow btn-xs sharp me-1" onclick="OnRoomassigned(@user.ID)">
+                                <i class="fas fa-child"></i>
+                            </a> *@
+                            <a href="javascript:void(0);" class="btn btn-primary shadow btn-xs sharp me-1" onclick="OnEdit(@user.ID)">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="javascript:void(0);" class="btn btn-danger shadow btn-xs sharp" onclick="OnDelete(@user.ID)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

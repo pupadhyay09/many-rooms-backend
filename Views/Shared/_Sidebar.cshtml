@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@using ManyRoomStudio.Infrastructure.Enums;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+	var sideUserRole = HttpContextAccessor.HttpContext.Session.GetString("UserRole");
+}
+<div class="deznav">
+	<div class="deznav-scroll">
+		<ul class="metismenu" id="menu">
+			@if (sideUserRole == ERole.SuperAdmin.ToString())
+			{
+				<li id="liUser">
+					<a class="" id="liGuest" href="/Home" aria-expanded="false">
+						@* <i class="flaticon-381-television"></i> *@
+						<i id="liGuestA" class="fa-solid fa-house"></i>
+						<span class="nav-text">Home</span>
+					</a>
+				</li>
+				<li>
+					<a class="" href="/Franchisee" aria-expanded="false">
+						<i class="fa fa-user-circle"></i>
+						<span class="nav-text">Franchisee Management</span>
+					</a>
+				</li>
+				<li>
+					<a href="/Rooms" aria-expanded="false">
+						<i class="flaticon-381-bookmark-1"></i>
+						<span class="nav-text">Rooms  Management</span>
+					</a>
+				</li>
+				<li>
+					<a href="/Staff" aria-expanded="false">
+						<i class="fa fa-user"></i>
+						<span class="nav-text">Staff  Management</span>
+					</a>
+				</li>
+				<li>
+					<a href="/Book" aria-expanded="false">
+						<i class="flaticon-381-stopclock"></i>
+						<span class="nav-text">Book Management</span>
+					</a>
+				</li>
+			}
+			else if (sideUserRole == ERole.FranchiseeAdmin.ToString())
+			{
+				<li>
+					<a href="/Rooms" aria-expanded="false">
+						<i class="flaticon-381-bookmark-1"></i>
+						<span class="nav-text">Rooms  Management</span>
+					</a>
+				</li>
+				<li>
+					<a href="/Staff" aria-expanded="false">
+						<i class="flaticon-381-bookmark-1"></i>
+						<span class="nav-text">Staff  Management</span>
+					</a>
+				</li>
+				
+			}
+			else if (sideUserRole == ERole.Manager.ToString())
+			{
+
+			}
+			else if (sideUserRole == ERole.Staff.ToString())
+			{
+				<li>
+					<a href="/Book" aria-expanded="false">
+						<i class="flaticon-381-stopclock"></i>
+						<span class="nav-text">Book Management</span>
+					</a>
+				</li>
+			}
+		</ul>
+	</div>
+</div>

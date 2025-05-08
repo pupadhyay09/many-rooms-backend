@@ -1,0 +1,23 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ManyRoomStudio.Boundary.Requests
+{
+    public class UpdateStaffUserRequest
+    {
+        public int ID { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Postcode { get; set; }
+        public string? Country { get; set; }
+        public string? Website { get; set; }
+        public string? MobileNo { get; set; }
+
+        [Required(ErrorMessage = "Email is required.")]
+        public string Email { get; set; }
+        public int FranchiseeAdminID { get; set; }
+
+    }
+}

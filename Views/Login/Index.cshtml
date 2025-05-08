@@ -1,0 +1,92 @@
+﻿@model ManyRoomStudio.Boundary.Requests.LoginRequest
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+    Random random = new Random();
+    var myString = random.Next(1, 11111);
+}
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Meal Ordering System" />
+    <meta property="og:title" content="Meal Ordering System" />
+    <meta property="og:description" content="Meal Ordering System" />
+    <meta name="format-detection" content="telephone=no">
+    <title>Many Rooms Studio</title>
+    <!-- Favicon icon -->
+    @* <link rel="icon" type="image/png" sizes="16x16" href="~/favicon.ico"> *@
+
+    <link rel="icon" type="image/png" href="~/icons/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="~/icons/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="~/icons/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/icons/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="~/icons/favicon/site.webmanifest" />
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <style>
+        .auth-form {
+            padding: 35px 50px !important;
+        }
+    </style>
+
+</head>
+
+<body class="vh-100">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="text-center mt-3">
+                                    <img src="~/images/logo/Logo_black.png" alt="" style="height: 70px;width:auto;">
+                                </div>
+                                <div class="auth-form">
+                                    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "MealForm" }))
+                                    {
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Email</strong></label>
+                                            <input type="text" name="Email" id="Email" class="form-control" value="@Model.Email" placeholder="Enter your email address." autocomplete="@myString" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Password</strong></label>
+                                            <input type="password" name="Password" id="Password" class="form-control" placeholder="*******" value="@Model.Password" autocomplete="@myString" required />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center mt-4">
+                                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (TempData["ErrorMessage"] != null)
+                                    {
+                                        <div class="mt-4">
+                                            <p class="text-danger">@TempData["ErrorMessage"]</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/vendor/global/global.min.js"></script>
+    <script src="~/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/js/custom.min.js"></script>
+    <script src="~/js/deznav-init.js"></script>
+    <script src="~/js/demo.js"></script>
+    <script src="~/js/styleSwitcher.js"></script>
+</body>
+</html>

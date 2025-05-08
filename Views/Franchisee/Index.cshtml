@@ -1,0 +1,613 @@
+﻿@using ManyRoomStudio.Boundary.Responses;
+@model List<UserModelResponse>
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var token = HttpContextAccessor.HttpContext.Session.GetString("token");
+
+}
+
+
+<div class="content-body">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header  pb-2">
+                        <h3 class="mb-0">Franchisee Management</h3>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#CreateNewFranchisee">
+                            Create
+                            Franchisee
+                        </button>
+                    </div>
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            @Html.Partial("~/Views/Franchisee/_franchiseelist.cshtml", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="CreateNewFranchisee">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="_modalFranchisee_">Create Franchisee</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <div class="basic-form py-0">
+                                            <form>
+                                                <input type="hidden" value="0" id="_userid_" />
+                                                <input type="hidden" value="0" id="_franchiseekeyid_" />
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                First
+                                                                Name
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter First Name" id="_firstname_" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Last
+                                                                Name
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Last Name" id="_lastname_" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Email
+                                                            </label>
+                                                            <input type="email" class="form-control"
+                                                                   placeholder="Enter Email" id="_emailid_" required value="">
+                                                            <span id="error_emailid_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Password
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Password" id="_password_" required value="">
+                                                            <span id="error_password_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Address
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Address" id="_address_" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                City
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter City" id="_city_" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                State
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter State" id="_state_" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Postcode
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Postcode" id="_postcosde_" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Country
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Country" id="_country_" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Website
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Website" id="_website_" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Mobile No
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter MobileNo" id="_mobileNo_" value="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Publishable key
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Publishablekey" id="_publishablekey_" required value="">
+                                                            <span id="error_publishablekey_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Secretkey
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Secretkey" id="_secretkey_" required value="">
+                                                            <span id="error_secretkey_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" id="btnSubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="roomassigned">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="_modalFranchisee_">Room Assigned</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <input type="hidden" id="_assigneduserid_" />
+                                        <div class="basic-form py-0" id="roomassignedbody">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" id="btnRoomAssignedSubmit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#franchiseeusertablelist').DataTable({
+            responsive: true,
+            //"ordering": false
+         });
+
+        $("#_emailid_, #_password_, #_publishablekey_, #_secretkey_").on('keypress', function () {
+            const inputId = $(this).attr('id');
+            $("#error" + inputId).text("");
+        });
+
+        $('#CreateNewFranchisee').on('hidden.bs.modal', function () {
+                $('#CreateNewFranchisee input').val('');
+                $("#_userid_").val(0);
+                $("#_franchiseekeyid_").val(0);
+                $("#_modalFranchisee_").text("Create Franchisee");
+                $("#_password_").prop("disabled", false);
+                $("#_password_").attr("type", "text");
+        });
+
+        $(document).on("click", "#btnSubmit", function (e) {
+            e.preventDefault();
+            $(".error-message").text("");
+            let hasError = false;
+            if(!$("#_emailid_").val()){
+                $("#error_emailid_").text("Email ID is required.");
+                hasError = true;
+            }
+            if(!$("#_password_").val()){
+                $("#error_password_").text("Password is required.");
+                hasError = true;
+            }
+            if(!$("#_publishablekey_").val()){
+                $("#error_publishablekey_").text("Publishable Key is required.");
+                hasError = true;
+            }
+            if (!$("#_secretkey_").val()) {
+                $("#error_secretkey_").text("Secret Key is required.");
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+            if($("#_userid_").val() > 0 ){
+                let franchiseeuser =
+                {
+                    "ID":$("#_userid_").val(),
+                    "FirstName": $("#_firstname_").val(),
+                    "LastName":$("#_lastname_").val(),
+                    "Address":$("#_address_").val(),
+                    "City":$("#_city_").val(),
+                    "State":$("#_state_").val(),
+                    "Postcode":$("#_postcosde_").val(),
+                    "Country":$("#_country_").val(),
+                    "Website":$("#_website_").val(),
+                    "MobileNo":$("#_mobileNo_").val(),
+                    "Email": $("#_emailid_").val(),
+                    "Publishablekey":$("#_publishablekey_").val(),
+                    "Secretkey":$("#_secretkey_").val(),
+                    "FranchiseekeyId":$("#_franchiseekeyid_").val()
+                };
+
+                $.ajax({
+                    url: 'api/v1/user/updatefranchiseeuser',
+                    type: 'PUT',
+                    data: JSON.stringify(franchiseeuser),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + '@token'
+                    },
+                     success: function (data)
+                     {
+                        if (data != null && data?.id != null && data?.id >0) {
+                            $("#CreateNewFranchisee").modal('hide');
+                            Swal.fire
+                            ({
+                                title: 'Saved!',
+                                text: 'Franchisee update successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+                                LoadFranchiseeList();
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire
+                            (
+                                'Sorry!',
+                                "There was an error update the franchisee.'",
+                                'error'
+                            );
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+
+                     }
+                });
+            }
+            else{
+                let franchiseeuser =
+                {
+                    "ID":$("#_userid_").val(),
+                    "FirstName": $("#_firstname_").val(),
+                    "LastName":$("#_lastname_").val(),
+                    "Address":$("#_address_").val(),
+                    "City":$("#_city_").val(),
+                    "State":$("#_state_").val(),
+                    "Postcode":$("#_postcosde_").val(),
+                    "Country":$("#_country_").val(),
+                    "Website":$("#_website_").val(),
+                    "MobileNo":$("#_mobileNo_").val(),
+                    "Email": $("#_emailid_").val(),
+                    "Password":$("#_password_").val(),
+                    "Publishablekey":$("#_publishablekey_").val(),
+                    "Secretkey":$("#_secretkey_").val(),
+                };
+
+                $.ajax({
+                    url: 'api/v1/user/createfranchiseeuser',
+                    type: 'POST',
+                    data: JSON.stringify(franchiseeuser),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                     headers:
+                     {
+                        'Authorization': 'Bearer ' + '@token'
+                     },
+                     success: function (data)
+                     {
+                        if (data != null && data?.id != null && data?.id >0) {
+                            $("#CreateNewFranchisee").modal('hide');
+                            Swal.fire
+                            ({
+                                title: 'Saved!',
+                                text: 'Franchisee created successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+                                LoadFranchiseeList();
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire
+                            (
+                                'Sorry!',
+                                "There was an error saving the franchisee.'",
+                                'error'
+                            );
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+
+                     }
+                });
+
+            }
+        });
+
+        $(document).on("click", "#btnRoomAssignedSubmit", function (e) {
+            let selectedIds = [];
+            let userid = $("#_assigneduserid_").val();
+                $('.selecteroom:checked').each(function () {
+                    selectedIds.push($(this).attr('attrroomid'));
+                });
+                debugger;
+            if(userid && userid > 0){
+                let assignedbody = {
+                    "UserId":userid,
+                    "RoomIds": selectedIds.length > 0 ? selectedIds : null
+                };
+                
+                 $.ajax({
+                    url: 'api/v1/roomfranchiseeadminmapping/user/assignedroom',
+                    type: 'POST',
+                    data: JSON.stringify(assignedbody),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + '@token'
+                    },
+                     success: function (data)
+                     {
+                        if (data != null && (data == true || data == "true")) {
+                            $("#roomassigned").modal('hide');
+                            Swal.fire
+                            ({
+                                title: 'Saved!',
+                                text: 'Assigned successfully.',
+                                icon: 'success',
+                                showConfirmButton: true,
+                                timer: 4000,
+                            }).then(() =>
+                            {
+                                
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire
+                            (
+                                'Sorry!',
+                                "There was an error assigne the rooms.'",
+                                'error'
+                            );
+                        }
+                     },
+                     error: function (xhr)
+                     {
+                        debugger;
+                        Swal.fire
+                        (
+                            'Sorry!',
+                            xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                            'error'
+                        );
+
+                     }
+                });
+            }
+        });
+    });
+
+    function LoadFranchiseeList() {
+         $.ajax({
+            url: 'api/v1/user/franchisee',
+            type: 'GET',
+            dataType: "json",
+             headers: {
+                'Authorization': 'Bearer ' + '@token'
+             },
+            success: function (data) {
+               debugger;
+                $(".table-responsive").html("");
+                $(".table-responsive").html(data);
+               // Re-initialize DataTable
+                $('#franchiseeusertablelist').DataTable({
+                    responsive: true,
+                });
+            }
+         });
+     }
+    function OnDelete(Id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: 'api/v1/user/delete/' + Id,
+                        type: 'DELETE',
+                        dataType: "json",
+                        headers: {
+                         'Authorization': 'Bearer ' + '@token'
+                       },
+                        success: function (data) {
+                            if(data != null &&( data === true || data === "true")){
+                               Swal.fire({
+                                            title: 'Delete!',
+                                            text: 'Franchisee delete successfully.',
+                                            icon: 'success',
+                                            showConfirmButton: true,
+                                            timer: 4000,
+                                        }).then(() => {
+                                            LoadFranchiseeList();
+                               });
+                            }
+                            else{
+                            }
+                        },
+                         error: function (xhr) {
+                                Swal.fire(
+                                        'Sorry!',
+                                           xhr?.responseJSON ? xhr?.responseJSON  : "Franchisee Not delete",
+                                        'error'
+                                );
+
+                         }
+                    });
+            }
+        });
+    }
+    function OnEdit(Id) {
+        $.ajax({
+            url: 'api/v1/user/franchisee/user/' + Id,
+            type: 'GET',
+            dataType: "json",
+            headers: {
+                'Authorization': 'Bearer ' + '@token'
+            },
+            success: function (data)
+            {
+                if(data != null && data?.id > 0)
+                {
+                    $("#_userid_").val(data?.id);
+                    $("#_firstname_").val(data?.firstName);
+                    $("#_lastname_").val(data?.lastName);
+                    $("#_address_").val(data?.address);
+                    $("#_city_").val(data?.city);
+                    $("#_state_").val(data?.state);
+                    $("#_postcosde_").val(data?.postcode);
+                    $("#_country_").val(data?.country);
+                    $("#_website_").val(data?.website);
+                    $("#_mobileNo_").val(data?.mobileNo);
+                    $("#_emailid_").val(data?.email);
+                    $("#_password_").val(data?.password);
+                    $("#_publishablekey_").val(data?.publishablekey);
+                    $("#_secretkey_").val(data?.secretkey);
+                    $("#_franchiseekeyid_").val(data?.franchiseekeyId);
+                    $("#CreateNewFranchisee").modal('show');
+                    $("#_password_").prop("disabled", true);
+                    $("#_password_").attr("type", "password");
+                    $("#_modalFranchisee_").text("Update Franchisee");
+                }
+            }
+        });
+    }
+
+    function OnRoomassigned(Id){
+        $("#_assigneduserid_").val("");
+        $.ajax({
+            url: 'api/v1/roomfranchiseeadminmapping/franchisee/room/mapping/'+Id,
+            type: 'GET',
+            dataType: "json",
+             headers: {
+                'Authorization': 'Bearer ' + '@token'
+             },
+            success: function (data) {
+                $("#_assigneduserid_").val(Id);
+                $("#roomassignedbody").html("");
+                $("#roomassignedbody").html(data);
+                $("#roomassigned").modal('show');
+            },
+            error: function (xhr)
+            {
+                Swal.fire
+                (
+                    'Sorry!',
+                     xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+                     'error'
+                );
+            }
+         });
+    }
+</script>
+

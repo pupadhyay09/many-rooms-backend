@@ -1,0 +1,51 @@
+﻿@using ManyRoomStudio.Boundary.Responses
+@model List<UserModelResponse>
+<table id="franchiseeusertablelist" class="display" style="min-width: 845px">
+    <thead>
+        <tr role="row">
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Postcode</th>
+            <th>MobileNo</th>
+            <th data-sortable="false">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Address</td>
+                    <td>@user.City</td>
+                    <td>@user.State</td>
+                    <td>@user.Country</td>
+                    <td>@user.Postcode</td>
+                    <td>@user.MobileNo</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="javascript:void(0);" class="btn btn-info shadow btn-xs sharp me-1" onclick="OnRoomassigned(@user.ID)">
+                                <i class="fas fa-child"></i>
+                            </a>
+                            <a href="javascript:void(0);" class="btn btn-primary shadow btn-xs sharp me-1" onclick="OnEdit(@user.ID)">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="javascript:void(0);" class="btn btn-danger shadow btn-xs sharp" onclick="OnDelete(@user.ID)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

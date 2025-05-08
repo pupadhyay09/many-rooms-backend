@@ -1,0 +1,172 @@
+﻿@* @using ManyRoomStudio.Domains.Rooms;
+@model room *@;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<div class="content-body">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header  pb-2">
+                        <h3 class="mb-0">Book Management</h3>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#CreateNewRoomBook">
+                            Create
+                            Room Book
+                        </button>
+                    </div>
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            @* @Html.Partial("~/Views/Staff/_stafflist.cshtml", Model.staffuserResponses); *@
+                            <table id="example5" class="display" style="min-width: 845px">
+                                <thead>
+                                    <tr role="row">
+                                        <th>Date </th>
+                                        <th>Start Time </th>
+                                        <th>End Time </th>
+                                        <th>Number of people </th>
+                                        <th>Event type</th>
+                                        <th>Total price</th>
+                                        <th>CTA  </th>
+                                        <th data-sortable="false">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>17/07/2008</td>
+                                        <td>10:00 AM</td>
+                                        <td>10:00 PM</td>
+                                        <td>10</td>
+                                        <td>Bithday </td>
+                                        <td>$100</td>
+                                        <td>Proceed to Payment</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="CreateNewRoomBook">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Create Room Book</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <div class="basic-form py-0">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Date
+                                                            </label>
+                                                            <input name="datepicker" class="datepicker-default form-control" id="datepicker" placeholder="30/05/2022">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                               Start Time
+                                                            </label>
+                                                            <input type="text" id="StartTime" name="Time" class="form-control" />
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                End Time
+                                                            </label>
+                                                            <input type="text" id="EndTime" name="Time" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">Number of people</label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Number of people">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Select event types</label>
+                                                            <select class="default-select  form-control wide">
+                                                                <option>Select event</option>
+                                                                <option>event 2</option>
+                                                                <option>event 3</option>
+                                                                <option>event 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+                        <!-- <button type="button" class="btn btn-secondary ">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+     flatpickr("#StartTime", {
+        enableTime: true,
+        noCalendar: true,
+        //dateFormat: "H:i", 
+        dateFormat: "h:i K",
+        time_24hr: false,    
+        defaultDate: new Date()
+    });
+    flatpickr("#EndTime", {
+        enableTime: true,
+        noCalendar: true,
+        //dateFormat: "H:i", 
+        dateFormat: "h:i K",
+        time_24hr: false,
+        defaultDate: new Date()
+    });
+</script>
+

@@ -1,0 +1,23 @@
+﻿@using ManyRoomStudio.Boundary.Responses
+@model List<FranchiseeRoomMappingResponse> 
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6 mt-4" >
+                <div class="form-check mb-3">
+                    <input class="form-check-input selecteroom"
+                           checked=@item.IsAssigned
+                           type="checkbox"
+                           id="Room_@item.RoomID"
+                           attrroomid="@item.RoomID"
+                           attruserid="@item.UserID">
+                    <label class="form-check-label" for="Room_@item.RoomID">
+                        @item.RoomName
+                    </label>
+                </div>
+            </div>
+        }
+    </div>
+}

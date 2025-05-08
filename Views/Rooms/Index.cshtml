@@ -1,0 +1,244 @@
+﻿@using ManyRoomStudio.Domains.Rooms;
+@model RoomManagementDomain;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .img-preview-box {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        .img-preview-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+    .delete-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: rgba(255, 0, 0, 0.7);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        line-height: 24px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+        .delete-btn:hover {
+            background-color: red;
+        }
+</style>
+
+<div class="content-body">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header  pb-2">
+                        <h3 class="mb-0">Room Management</h3>
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                data-bs-target="#CreateNewRoom">
+                            Create
+                            Room
+                        </button>
+                    </div>
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            @Html.Partial("~/Views/Rooms/_roomlist.cshtml", Model.roomManagementResponses)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="CreateNewRoom">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Create Room</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <div class="basic-form py-0">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Room
+                                                                Name
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Room Name" id="_roomname_">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Description
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Enter Description" id="_roomDescription_">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Room
+                                                                VAT( % )
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Room Name" id="_roomvat_">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Pricing
+                                                                per hour
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Pricing per hour" id="_roompricing_">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">
+                                                                Discount (if applicable)
+                                                            </label>
+                                                            <select class="default-select  form-control wide" id="_roomDiscountapplicable_">
+                                                                <option>True</option>
+                                                                <option>False</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Discount Amount
+                                                            </label>
+                                                            <input type="text" class="form-control"
+                                                                   placeholder="Discount">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Select event types</label>
+                                                            <select class="default-select form-control wide" id="_eventtype_">
+                                                            <option value="">Select event</option>
+                                                            @if (Model.eventType != null && Model.eventType.Count > 0)
+                                                            {
+                                                                foreach (var item in Model.eventType)
+                                                                {
+                                                                    <option value="@item.ID">@item.Name</option>
+                                                                }
+                                                            }
+                                                            </select>
+                                                            <span id="error_eventtype_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="col-sm-6 col-form-label">
+                                                                Room Image
+                                                            </label>
+                                                            <input type="file" multiple class="form-control" id="gallery-photo-add" name="filename">
+                                                        </div>
+                                                        <div class="gallery"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+     $(document).ready(function () {
+          $('#roomtablelist').DataTable({
+            responsive: true,
+        });
+     });
+    $(function() {
+        // Multiple images preview in browser
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+                debugger;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event) {
+                    const previewBox = $('<div class="img-preview-box"></div>');
+                    const img = $('<img>').attr('src', event.target.result);
+                    const deleteBtn = $('<span class="delete-btn">&times;</span>');
+
+                    deleteBtn.on('click', function() {
+                        previewBox.remove();
+                    });
+
+                    previewBox.append(img).append(deleteBtn);
+                    $(placeToInsertImagePreview).append(previewBox);
+                };
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function() {
+            imagesPreview(this, 'div.gallery');
+        });
+    });
+</script>
+
