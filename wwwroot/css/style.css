@@ -8093,7 +8093,7 @@ textarea.form-control {
     padding: 0; }
   *::before {
     margin: 0;
-    padding: 10px; }
+    padding: 0; }
 
 a {
   color: #7e7e7e; }

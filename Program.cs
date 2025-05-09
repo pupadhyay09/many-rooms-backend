@@ -1,4 +1,5 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using ManyRoomStudio.Autofac;
 using ManyRoomStudio.Infrastructure.Filters;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 
@@ -21,17 +23,28 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddCors(c =>
+//builder.Services.AddCors(c =>
+//{
+//    c.AddPolicy("AllowOrigin",
+//      policy =>
+//      {
+//          policy
+//            .WithOrigins("http://localhost:3000", "https://localhost:7178", "https://localhost:5283/")
+//            .AllowAnyOrigin()
+//            .AllowAnyHeader()
+//            .AllowAnyMethod();
+//      });
+//});
+
+builder.Services.AddCors(options =>
 {
-    c.AddPolicy("AllowOrigin",
-      policy =>
-      {
-          policy
-            .WithOrigins("http://localhost:3000", "https://localhost:7178", "https://localhost:5283/")
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder
             .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-      });
+            .AllowAnyMethod() // includes PUT
+            .AllowAnyHeader();
+    });
 });
 
 //var config = new AppConfiguration();
@@ -168,6 +181,15 @@ builder.Services.AddAuthentication(x =>
        };
    });
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "My Many Rooms Studio API",
+        Version = "v1",
+        Description = "A simple example ASP.NET Core Web API"
+    });
+});
 
 var app = builder.Build();
 
@@ -178,14 +200,13 @@ var app = builder.Build();
 //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 //    app.UseHsts();
 //}
-
 if (app.Environment.IsDevelopment())
 {
-    //app.UseSwagger();
-    //app.UseSwaggerUI(c =>
-    //{
-    //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Many Rooms Studio API V1");
-    //});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 
     app.UseMigrationsEndPoint();
     app.UseDeveloperExceptionPage();

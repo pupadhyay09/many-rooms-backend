@@ -13,7 +13,7 @@ namespace ManyRoomStudio.Infrastructure
             {
                 ID = request.ID,
                 HourlyPrice = request.HourlyPrice,
-                DiscountAmount = request.DiscountAmount,
+                DiscountPercentage = request.DiscountPercentage,
                 Capacity = request.Capacity,
                 Iserror = false,
                 ErrorMessage = ""
@@ -26,7 +26,7 @@ namespace ManyRoomStudio.Infrastructure
             {
                 ID = request.ID,
                 HourlyPrice = request.HourlyPrice,
-                DiscountAmount = request.DiscountAmount,
+                DiscountPercentage = request.DiscountPercentage,
                 Capacity = request.Capacity,
             };
         }

@@ -26,6 +26,9 @@ namespace ManyRoomStudio.Repository
 
         public DbSet<vwStaffModel> vwStaffModels { get; set; }
 
+        public DbSet<StaffAvailability> StaffAvailabilities { get; set; }
+        public DbSet<UserBankDetail>  UserBankDetails { get; set; }
+
         public ManyRoomStudioContext(DbContextOptions<ManyRoomStudioContext> options)
             : base(options)
         {
@@ -82,7 +85,14 @@ namespace ManyRoomStudio.Repository
                 .HasOne(re => re.EventDetail)
                 .WithMany(md => md.RoomEventList)
                 .HasForeignKey(re => re.EventID);
-                //.OnDelete(DeleteBehavior.Restrict);
+            //.OnDelete(DeleteBehavior.Restrict);
+
+            //
+            builder.Entity<Room>()
+                .HasOne(b => b.OwnershipType)
+                .WithMany(m => m.Rooms)
+                .HasForeignKey(b => b.OwnershipTypeID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public static ManyRoomStudioContext Create()

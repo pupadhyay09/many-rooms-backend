@@ -1,8 +1,14 @@
 ﻿@using ManyRoomStudio.Domains.Rooms;
 @model RoomManagementDomain;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var token = HttpContextAccessor.HttpContext.Session.GetString("token");
+
 }
 
 <style>
@@ -155,10 +161,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-6">
                                                         <div class="mb-3">
                                                             <label class="form-label">Select event types</label>
-                                                            <select class="default-select form-control wide" id="_eventtype_">
+                                                            <select class="default-select form-control wide" id="_eventtype_" multiple>
                                                             <option value="">Select event</option>
                                                             @if (Model.eventType != null && Model.eventType.Count > 0)
                                                             {
@@ -169,6 +175,22 @@
                                                             }
                                                             </select>
                                                             <span id="error_eventtype_" class="error-message"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Select ownership  types</label>
+                                                            <select class="default-select form-control wide" id="_ownershiptype_">
+                                                                <option value="">Select Ownership</option>
+                                                                @if (Model.ownershipType != null && Model.ownershipType.Count > 0)
+                                                                {
+                                                                    foreach (var item in Model.ownershipType)
+                                                                    {
+                                                                        <option value="@item.ID">@item.Name</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                            <span id="error_ownershiptype_" class="error-message"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -193,6 +215,34 @@
                     </div>
                     <div class="modal-footer justify-content-center py-0 pb-3">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="roomassigned">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content modal-lg">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="_modalFranchisee_">Room Assigned</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body py-0 ">
+                                        <input type="hidden" id="_assigneduserid_" />
+                                        <div class="basic-form py-0" id="roomassignedbody">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center py-0 pb-3">
+                        <button type="button" class="btn btn-success" id="btnRoomAssignedSubmit">Submit</button>
                     </div>
                 </div>
             </div>
@@ -240,5 +290,33 @@
             imagesPreview(this, 'div.gallery');
         });
     });
+
+     function OnRoomassigned(Id){
+        $("#_assigneduserid_").val("");
+        $("#roomassigned").modal('show');
+        // $.ajax({
+        //     url: 'api/v1/roomfranchiseeadminmapping/franchisee/room/mapping/'+Id,
+        //     type: 'GET',
+        //     dataType: "json",
+        //      headers: {
+        //         'Authorization': 'Bearer ' + '@token'
+        //      },
+        //     success: function (data) {
+        //         $("#_assigneduserid_").val(Id);
+        //         $("#roomassignedbody").html("");
+        //         $("#roomassignedbody").html(data);
+        //         $("#roomassigned").modal('show');
+        //     },
+        //     error: function (xhr)
+        //     {
+        //         Swal.fire
+        //         (
+        //             'Sorry!',
+        //              xhr?.responseJSON ? xhr?.responseJSON  : "Something went wrong. Please try again.",
+        //              'error'
+        //         );
+        //     }
+        //  });
+    }
 </script>
 

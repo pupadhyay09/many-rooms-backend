@@ -17,5 +17,6 @@ namespace ManyRoomStudio.Models.Entities
         public bool IsDelete { get; set; }
         public bool IsActive { get; set; }
         public List<RoomEvent> RoomEventList { get; set; }
+        public ICollection<Room> Rooms { get; set; }
     }
 }

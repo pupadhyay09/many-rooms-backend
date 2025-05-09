@@ -6,7 +6,7 @@
         public string? Description { get; set; }
         public int FranchiseeAdminID { get; set; }
         public decimal HourlyPrice { get; set; }
-        public Nullable<decimal> DiscountAmount { get; set; }
+        public Nullable<decimal> DiscountPercentage { get; set; }
         public int Capacity { get; set; }
         public int RoomEventID { get; set; }
 

@@ -7,6 +7,7 @@
         public const string ModifiedByColName = "UpdatedBy";
         public const string ModifiedAtColName = "UpdatedAt";
         public const string CategoryEvent = "EventType";
+        public const string CategoryOwnership = "OwnershipType";
     }
 
     public class EmailConstants

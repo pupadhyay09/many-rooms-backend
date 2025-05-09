@@ -5,9 +5,9 @@ namespace ManyRoomStudio.Boundary.Requests
     public class LoginRequest
     {
         [Required]
-        public string Email { get; set; } = "admin@admin.com";
+        public string Email { get; set; }
         [Required]
-        public string Password { get; set; } = "Eglaf@1234";
+        public string Password { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

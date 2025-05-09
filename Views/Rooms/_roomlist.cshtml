@@ -9,6 +9,8 @@
             <th>Discount</th>
             <th>Maximum capacity </th>
             <th>Event types</th>
+            <th>Ownership types</th>
+            <th>Vat Enabled</th>
             <th data-sortable="false">Action</th>
         </tr>
     </thead>
@@ -21,14 +23,26 @@
                     <td>@user.RoomName</td>
                     <td>@user.Description</td>
                     <td>@user.HourlyPrice</td>
-                    <td>@user.DiscountAmount</td>
+                    <td>@user.DiscountPercentage</td>
                     <td>@user.Capacity</td>
                     <td>@user.RoomEventsName</td>
+                    <td>@user.OwnershipTypeName</td>
+                    <td>
+                        @{
+                            if (user.IsVATEnabled)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        }
                     <td>
                         <div class="d-flex">
-                            @* <a href="javascript:void(0);" class="btn btn-info shadow btn-xs sharp me-1" onclick="OnRoomassigned(@user.ID)">
+                            <a href="javascript:void(0);" class="btn btn-info shadow btn-xs sharp me-1" onclick="OnRoomassigned(@user.ID)">
                                 <i class="fas fa-child"></i>
-                            </a> *@
+                            </a>
                             <a href="javascript:void(0);" class="btn btn-primary shadow btn-xs sharp me-1" onclick="OnEdit(@user.ID)">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>

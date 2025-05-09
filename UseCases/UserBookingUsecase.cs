@@ -52,7 +52,7 @@ namespace ManyRoomStudio.UseCases
                                         Email = u.Email,
                                         RoomName = r.Description,
                                         HourlyPrice = r.HourlyPrice,
-                                        DiscountAmount = r.DiscountAmount,
+                                        DiscountPercentage = r.DiscountPercentage,
                                         Capacity = r.Capacity,
                                         TotalBeds = r.TotalBeds,
                                         TotalSofas = r.TotalSofas,

@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header  pb-2">
                         <h3 class="mb-0">Franchisee Management</h3>
-                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" id="btnAddNewFranchisee"
                                 data-bs-target="#CreateNewFranchisee">
                             Create
                             Franchisee
@@ -299,6 +299,8 @@
                     "Secretkey":$("#_secretkey_").val(),
                     "FranchiseekeyId":$("#_franchiseekeyid_").val()
                 };
+
+                $("#btnAddNewFranchisee").focus();
 
                 $.ajax({
                     url: 'api/v1/user/updatefranchiseeuser',

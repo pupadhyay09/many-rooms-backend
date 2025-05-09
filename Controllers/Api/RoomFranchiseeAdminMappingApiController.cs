@@ -46,6 +46,19 @@ namespace ManyRoomStudio.Controllers.Api
 
         }
 
+        [HttpGet("franchisee/room/mapping/{RoomId}")]
+        public async Task<IActionResult> GetFranchiseeRoomMappingByRoomId(int RoomId)
+        {
+            var allroom = await _franchiseeRoomMappingByUserIdUsecase.ExecuteAsync(RoomId).ConfigureAwait(false);
+
+            var body = string.Empty;
+            //if (allroom != null && allroom.Any())
+            //    body = await _partial.Render("~/Views/Rooms/_franchiseelist.cshtml", allroom).ConfigureAwait(false);
+
+            return Ok(body);
+
+        }
+
         [HttpPost("user/assignedroom")]
         public async Task<IActionResult> AssignedRoomIds(AssignedRoomReqest reqest)
         {

@@ -36,27 +36,35 @@ namespace ManyRoomStudio.UseCases
                 _masterDetailsGateway.SetDb(db);
 
                 var retval = db.Rooms.AsNoTracking()
-    .Where(x => x.IsDelete == false && x.RoomEvents != null && x.RoomEvents.Any(e => e.IsDelete == false)).OrderByDescending(x => x.UpdatedAt)
-    .Select(x => new RoomManagementResponse
-    {
-        ID = x.ID,
-        Description = x.Description,
-        HourlyPrice = x.HourlyPrice,
-        DiscountAmount = x.DiscountAmount,
-        Capacity = x.Capacity,
-        TotalBeds = x.TotalBeds,
-        TotalSofas = x.TotalSofas,
-        RoomName = x.RoomName,
-        RoomEventsName = string.Join(", ", x.RoomEvents
-                .Where(e => e.IsDelete == false)
-                .Select(e => e.EventDetail.Name))
-    })
-    .ToList();
+                            .Include(x=>x.OwnershipType)
+                            .Where(x => x.IsDelete == false && x.RoomEvents != null && x.RoomEvents.Any(e => e.IsDelete == false)).OrderByDescending(x => x.UpdatedAt)
+                            .Select(x => new RoomManagementResponse
+                            {
+                                ID = x.ID,
+                                Description = x.Description,
+                                HourlyPrice = x.HourlyPrice,
+                                DiscountPercentage = x.DiscountPercentage,
+                                Capacity = x.Capacity,
+                                TotalBeds = x.TotalBeds,
+                                TotalSofas = x.TotalSofas,
+                                RoomName = x.RoomName,
+                                OwnershipTypeName = x.OwnershipType.Name,
+                                IsVATEnabled = x.IsVATEnabled,
+                                RoomEventsName = string.Join(", ", x.RoomEvents
+                                        .Where(e => e.IsDelete == false)
+                                        .Select(e => e.EventDetail.Name))
+                            })
+                            .ToList();
 
                 var eventtype = await _masterDetailsGateway.GetAll(x => x.IsDelete == false && x.Category.ToLower() == ManyRoomStudioConstants.CategoryEvent.ToLower()).ConfigureAwait(false);
 
                 if (eventtype != null && eventtype.Any())
                     roomManagementDomain.eventType = eventtype.ToList().ToResponse();
+
+                var ownershipType = await _masterDetailsGateway.GetAll(x => x.IsDelete == false && x.Category.ToLower() == ManyRoomStudioConstants.CategoryOwnership.ToLower()).ConfigureAwait(false);
+
+                if (ownershipType != null && ownershipType.Any())
+                    roomManagementDomain.ownershipType = ownershipType.ToList().ToResponse();
 
                 if (retval != null && retval.Any())
                     roomManagementDomain.roomManagementResponses = retval;

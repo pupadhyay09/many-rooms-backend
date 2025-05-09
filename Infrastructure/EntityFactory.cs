@@ -10,7 +10,7 @@ namespace ManyRoomStudio.Infrastructure
             return new Room {
                 ID = request.ID,
                 HourlyPrice = request.HourlyPrice,
-                DiscountAmount = request.DiscountAmount,
+                DiscountPercentage = request.DiscountPercentage,
                 Capacity = request.Capacity,
                 IsDelete = false,
                 Description = request.Description,

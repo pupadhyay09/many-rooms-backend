@@ -84,7 +84,7 @@ namespace ManyRoomStudio.UseCases
                     ID = x.ID,
                     Description = x.Description,
                     HourlyPrice = x.HourlyPrice,
-                    DiscountAmount = x.DiscountAmount,
+                    DiscountPercentage = x.DiscountPercentage,
                     Capacity = x.Capacity,
                     TotalBeds = x.TotalBeds,
                     TotalSofas = x.TotalSofas,
