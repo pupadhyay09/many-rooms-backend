@@ -35,6 +35,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 //            .AllowAnyMethod();
 //      });
 //});
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 builder.Services.AddCors(options =>
 {
@@ -114,7 +116,7 @@ builder.Services.AddControllersWithViews(o =>
 
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    containerBuilder.RegisterModule<AutofacConfig>();  
+    containerBuilder.RegisterModule<AutofacConfig>();
 });
 
 //builder.Services.AddControllersWithViews(o =>
@@ -189,7 +191,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "A simple example ASP.NET Core Web API"
     });
- // ✅ Add JWT bearer scheme
+    // ✅ Add JWT bearer scheme
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -228,10 +230,10 @@ var app = builder.Build();
 //}
 
 app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-    });
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
 
 if (app.Environment.IsDevelopment())
 {
