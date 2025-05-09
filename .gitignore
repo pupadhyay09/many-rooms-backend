@@ -69,7 +69,7 @@ ehthumbs.db
 *.mdb
 
 # WebAssembly
-wwwroot/
+# wwwroot/
 
 # Entity Framework Migrations
 Migrations/
